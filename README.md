@@ -5,8 +5,6 @@ This Project is built to test the functionality of this NBA Website - NBA Websit
 
 # Built With
 
-• Python - The server scripting language.
-
-• Selenium - The automated testing framework was used to test automated test suites for the site.
+• Selenium WebDriver - The automated testing framework was used to build automated scripts with Python. 
 
 • Pytest - The projct was built with the Pytest framework using page object design to test scripts execution.
