@@ -5,6 +5,6 @@ This Project is built to test the functionality of this NBA Website - NBA Websit
 
 # Built With
 
-• Selenium WebDriver - The automated testing framework was used to build automated scripts with Python. 
+• Selenium WebDriver - The automated testing tool was used to build automated scripts with Python. 
 
 • Pytest - The project was built with the Pytest framework using page object design to test scripts execution.
