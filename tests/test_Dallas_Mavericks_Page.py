@@ -15,7 +15,6 @@ from utilities.BaseClass import BaseClass
 
 class TestDallasMavericksPage(BaseClass):
 
-
     def test_dallas_mavericks_franchise_verifiy_team(self):
         log = self.getLogger()
         log.info("Opening Dallas Mavericks Page")
@@ -25,13 +24,12 @@ class TestDallasMavericksPage(BaseClass):
         log.info("Verify Dallas Mavericks Page")
         assert "Dallas Mavericks" in self.Mavericks_Page().verifyTeamText().text
 
-
     def test_dallas_mavericks_roster_players_stats(self):
         log = self.getLogger()
         self.Mavericks_Page().openMavericksPageButton().click()
         self.waitForElement("Roster")
         self.Mavericks_Page().pressRosterButton().click()
-        # time.sleep(2)
+
         self.waitForGaurd("//td[text()='C']")
         players_with_updated_stats = []
         players_with_out_stats = []
@@ -41,9 +39,9 @@ class TestDallasMavericksPage(BaseClass):
             self.waitForPageComplete()
 
             if self.Mavericks_Page().getIsPlayer().text != '':  # there IS a player stats
-                # time.sleep(2)
+
                 players_with_updated_stats.append(self.Mavericks_Page().getPlayerName())
-                # time.sleep(2)
+
                 self.Mavericks_Page().pressPlayersStatsSeasonsHeader().click()
                 seasons_sorted = sorted(self.Mavericks_Page().getPlayersStatsSeasons())
                 log.info(
@@ -57,21 +55,21 @@ class TestDallasMavericksPage(BaseClass):
                 assert seasons_sorted_reverse == self.Mavericks_Page().getPlayersStatsSeasonsReverse()
 
                 self.Mavericks_Page().pressPlayersStatsteamsHeader().click()
-                # time.sleep(0.5)
+
                 teams_sorted = sorted(self.Mavericks_Page().getPlayersStatsteams())
                 log.info(
                     "Testing if Column 'Team' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
                 assert teams_sorted == self.Mavericks_Page().getPlayersStatsteams()
 
                 self.Mavericks_Page().pressPlayersStatsteamsHeader().click()
-                # time.sleep(0.5)
+
                 teams_sorted_reverse = sorted(self.Mavericks_Page().getPlayersStatsteamsReverse(), reverse=True)
                 log.info(
                     "Testing if Column 'Team' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
                 assert teams_sorted_reverse == self.Mavericks_Page().getPlayersStatsteamsReverse()
 
                 self.Mavericks_Page().pressPlayersStatsnumGamesHeader().click()
-                # time.sleep(0.5)
+
                 games_int = [int(i) for i in self.Mavericks_Page().getPlayersStatsNumGames()]
                 num_games_sorted = sorted(games_int, reverse=True)
                 log.info(
@@ -79,7 +77,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert num_games_sorted == games_int
 
                 self.Mavericks_Page().pressPlayersStatsnumGamesHeader().click()
-                # time.sleep(0.5)
+
                 games_reverse_int = [int(i) for i in self.Mavericks_Page().getPlayersStatsNumGamesReverse()]
                 num_games_sorted_reverse = sorted(games_int)
 
@@ -88,7 +86,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert num_games_sorted_reverse == games_reverse_int
 
                 self.Mavericks_Page().pressPlayersStatsNumGamesStartedHeader().click()
-                # time.sleep(0.5)
+
                 games_started_int = [int(i) for i in self.Mavericks_Page().getPlayersStatsNumGamesStarted()]
                 num_games_started_sorted = sorted(games_started_int, reverse=True)
                 log.info(
@@ -96,15 +94,16 @@ class TestDallasMavericksPage(BaseClass):
                 assert num_games_started_sorted == games_started_int
 
                 self.Mavericks_Page().pressPlayersStatsNumGamesStartedHeader().click()
-                # time.sleep(0.5)
-                games_started_reverse_int = [int(i) for i in self.Mavericks_Page().getPlayersStatsNumGamesStartedReverse()]
+
+                games_started_reverse_int = [int(i) for i in
+                                             self.Mavericks_Page().getPlayersStatsNumGamesStartedReverse()]
                 num_games_started_sorted_reverse = sorted(games_started_reverse_int)
                 log.info(
                     "Testing if Column 'Games Started' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
                 assert num_games_started_sorted_reverse == games_started_reverse_int
 
                 self.Mavericks_Page().pressPlayersStatsMinutesPlayedHeader().click()
-                # time.sleep(0.5)
+
                 minutes_played_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsMinutesPlayed()]
                 minutes_played_sorted = sorted(minutes_played_float, reverse=True)
                 log.info(
@@ -112,7 +111,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert minutes_played_sorted == minutes_played_float
 
                 self.Mavericks_Page().pressPlayersStatsMinutesPlayedHeader().click()
-                # time.sleep(0.5)
+
                 minutes_played_reverse_float = [float(i) for i in
                                                 self.Mavericks_Page().getPlayersStatsMinutesPlayedReverse()]
                 minutes_played_sorted_reverse = sorted(minutes_played_reverse_float)
@@ -121,7 +120,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert minutes_played_sorted_reverse == minutes_played_reverse_float
 
                 self.Mavericks_Page().pressPlayersStatsFieldGoalsPercentageHeader().click()
-                # time.sleep(0.5)
+
                 field_goals_percentage_float = [float(i) for i in
                                                 self.Mavericks_Page().getPlayersStatsFieldGoalsPercentage()]
                 field_goals_percentage_sorted = sorted(field_goals_percentage_float, reverse=True)
@@ -130,7 +129,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert field_goals_percentage_sorted == field_goals_percentage_float
 
                 self.Mavericks_Page().pressPlayersStatsFieldGoalsPercentageHeader().click()
-                # time.sleep(0.5)
+
                 field_goals_percentage_reverse_float = [float(i) for i in
                                                         self.Mavericks_Page().getPlayersStatsFieldGoalsPercentageReverse()]
                 field_goals_percentage_sorted_reverse = sorted(field_goals_percentage_reverse_float)
@@ -139,7 +138,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert field_goals_percentage_sorted_reverse == field_goals_percentage_reverse_float
 
                 self.Mavericks_Page().pressPlayersStatsThreePointPercentageHeader().click()
-                # time.sleep(0.5)
+
                 three_point_percentage_float = [float(i) for i in
                                                 self.Mavericks_Page().getPlayersStatsThreePointPercentage()]
                 three_point_percentage_sorted = sorted(three_point_percentage_float, reverse=True)
@@ -148,7 +147,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert three_point_percentage_sorted == three_point_percentage_float
 
                 self.Mavericks_Page().pressPlayersStatsThreePointPercentageHeader().click()
-                # time.sleep(0.5)
+
                 three_point_percentage_reverse_float = [float(i) for i in
                                                         self.Mavericks_Page().getPlayersStatsThreePointPercentageReverse()]
                 three_point_percentage_sorted_reverse = sorted(three_point_percentage_reverse_float)
@@ -157,15 +156,16 @@ class TestDallasMavericksPage(BaseClass):
                 assert three_point_percentage_sorted_reverse == three_point_percentage_reverse_float
 
                 self.Mavericks_Page().pressPlayersStatsFreeThrowPercentageHeader().click()
-                # time.sleep(0.5)
-                free_throw_percentage_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsFreethrowPercentage()]
+
+                free_throw_percentage_float = [float(i) for i in
+                                               self.Mavericks_Page().getPlayersStatsFreethrowPercentage()]
                 free_throw_percentage_sorted = sorted(free_throw_percentage_float, reverse=True)
                 log.info(
                     "Testing if Column 'Free Throw Percentage' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
                 assert free_throw_percentage_sorted == free_throw_percentage_float
 
                 self.Mavericks_Page().pressPlayersStatsFreeThrowPercentageHeader().click()
-                # time.sleep(0.5)
+
                 free_throw_percentage_reverse_float = [float(i) for i in
                                                        self.Mavericks_Page().getPlayersStatsFreethrowPercentageReverse()]
                 free_throw_percentage_sorted_reverse = sorted(free_throw_percentage_reverse_float)
@@ -174,7 +174,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert free_throw_percentage_sorted_reverse == free_throw_percentage_reverse_float
 
                 self.Mavericks_Page().pressPlayersStatsReboundsHeader().click()
-                # time.sleep(0.5)
+
                 rebounds_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsRebounds()]
                 rebounds_sorted = sorted(rebounds_float, reverse=True)
                 log.info(
@@ -182,7 +182,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert rebounds_sorted == rebounds_float
 
                 self.Mavericks_Page().pressPlayersStatsReboundsHeader().click()
-                # time.sleep(0.5)
+
                 rebounds_reverse_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsReboundsReverse()]
                 rebounds_sorted_reverse = sorted(rebounds_reverse_float)
                 log.info(
@@ -190,7 +190,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert rebounds_sorted_reverse == rebounds_reverse_float
 
                 self.Mavericks_Page().pressPlayersStatsAssistsHeader().click()
-                # time.sleep(0.5)
+
                 assists_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsAssists()]
                 assists_sorted = sorted(assists_float, reverse=True)
                 log.info(
@@ -198,7 +198,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert assists_sorted == assists_float
 
                 self.Mavericks_Page().pressPlayersStatsAssistsHeader().click()
-                # time.sleep(0.5)
+
                 assists_reverse_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsAssistsReverse()]
                 assists_sorted_reverse = sorted(assists_reverse_float)
                 log.info(
@@ -206,7 +206,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert assists_sorted_reverse == assists_reverse_float
 
                 self.Mavericks_Page().pressPlayersStatsStealsHeader().click()
-                # time.sleep(0.5)
+
                 steals_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsSteals()]
                 steals_sorted = sorted(steals_float, reverse=True)
                 log.info(
@@ -214,7 +214,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert steals_sorted == steals_float
 
                 self.Mavericks_Page().pressPlayersStatsStealsHeader().click()
-                # time.sleep(0.5)
+
                 steals_reverse_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsStealsReverse()]
                 steals_sorted_reverse = sorted(steals_reverse_float)
                 log.info(
@@ -222,7 +222,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert steals_sorted_reverse == steals_reverse_float
 
                 self.Mavericks_Page().pressPlayersStatsBlocksHeader().click()
-                # time.sleep(0.5)
+
                 blocks_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsBlocks()]
                 blocks_sorted = sorted(blocks_float, reverse=True)
                 log.info(
@@ -230,7 +230,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert blocks_sorted == blocks_float
 
                 self.Mavericks_Page().pressPlayersStatsBlocksHeader().click()
-                # time.sleep(0.5)
+
                 blocks_reverse_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsBlocksReverse()]
                 blocks_sorted_reverse = sorted(blocks_reverse_float)
                 log.info(
@@ -238,7 +238,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert blocks_sorted_reverse == blocks_reverse_float
 
                 self.Mavericks_Page().pressPlayersStatsTurnoversHeader().click()
-                # time.sleep(0.5)
+
                 turnovers_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsTurnovers()]
                 turnovers_sorted = sorted(turnovers_float, reverse=True)
                 log.info(
@@ -246,7 +246,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert turnovers_sorted == turnovers_float
 
                 self.Mavericks_Page().pressPlayersStatsTurnoversHeader().click()
-                # time.sleep(0.5)
+
                 turnovers_reverse_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsTurnoversReverse()]
                 turnovers_sorted_reverse = sorted(turnovers_reverse_float)
                 log.info(
@@ -254,7 +254,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert turnovers_sorted_reverse == turnovers_reverse_float
 
                 self.Mavericks_Page().pressPlayersStatsPointsHeader().click()
-                # time.sleep(0.5)
+
                 points_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsPoints()]
                 points_sorted = sorted(points_float, reverse=True)
                 log.info(
@@ -262,7 +262,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert points_sorted == points_float
 
                 self.Mavericks_Page().pressPlayersStatsPointsHeader().click()
-                # time.sleep(0.5)
+
                 points_reverse_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsPointsReverse()]
                 points_sorted_reverse = sorted(points_reverse_float)
                 log.info(
@@ -270,7 +270,7 @@ class TestDallasMavericksPage(BaseClass):
                 assert points_sorted_reverse == points_reverse_float
 
                 self.Mavericks_Page().pressPlayersStatsDoubleDoublesHeader().click()
-                # time.sleep(0.5)
+
                 double_doubles_int = [int(i) for i in self.Mavericks_Page().getPlayersStatsDoubleDoubles()]
                 double_doubles_sorted = sorted(double_doubles_int, reverse=True)
                 log.info(
@@ -278,15 +278,16 @@ class TestDallasMavericksPage(BaseClass):
                 assert double_doubles_sorted == double_doubles_int
 
                 self.Mavericks_Page().pressPlayersStatsDoubleDoublesHeader().click()
-                # time.sleep(0.5)
-                double_doubles_reverse_int = [int(i) for i in self.Mavericks_Page().getPlayersStatsDoubleDoublesReverse()]
+
+                double_doubles_reverse_int = [int(i) for i in
+                                              self.Mavericks_Page().getPlayersStatsDoubleDoublesReverse()]
                 double_doubles_sorted_reverse = sorted(double_doubles_reverse_int)
                 log.info(
                     "Testing if Column 'DoubleDoubles' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
                 assert double_doubles_sorted_reverse == double_doubles_reverse_int
 
                 self.Mavericks_Page().pressPlayersStatsTripleDoublesHeader().click()
-                # time.sleep(0.5)
+
                 triple_doubles_int = [int(i) for i in self.Mavericks_Page().getPlayersStatsTripleDoubles()]
                 triple_doubles_sorted = sorted(triple_doubles_int, reverse=True)
                 log.info(
@@ -294,26 +295,21 @@ class TestDallasMavericksPage(BaseClass):
                 assert triple_doubles_sorted == triple_doubles_int
 
                 self.Mavericks_Page().pressPlayersStatsTripleDoublesHeader().click()
-                # time.sleep(0.5)
-                triple_doubles_reverse_int = [int(i) for i in self.Mavericks_Page().getPlayersStatsTripleDoublesReverse()]
+
+                triple_doubles_reverse_int = [int(i) for i in
+                                              self.Mavericks_Page().getPlayersStatsTripleDoublesReverse()]
                 triple_doubles_sorted_reverse = sorted(triple_doubles_reverse_int)
                 log.info(
                     "Testing if Column 'TripleDoubles' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
                 assert triple_doubles_sorted_reverse == triple_doubles_reverse_int
 
             else:
-                # time.sleep(1)
 
                 players_with_out_stats.append(self.Mavericks_Page().getPlayerName())
-                # time.sleep(1)
 
             self.Mavericks_Page().closePlayerStatsCloseButton().click()
         log.info("List of players with updated stats: " + str(players_with_updated_stats))
         log.info("List of players without updated stats: " + str(players_with_out_stats))
-
-
-
-
 
     @pytest.mark.usefixtures("mavericks_salaries_team_setup")
     def test_dallas_mavericks_salaries_sorted_players_column(self):
@@ -529,7 +525,7 @@ class TestDallasMavericksPage(BaseClass):
         log = self.getLogger()
         self.Mavericks_Page().clickDob().click()
         self.Mavericks_Page().getRosterDobsReverse().sort(key=lambda date: datetime.strptime(date, "%d/%m/%Y"),
-                                                        reverse=True)
+                                                          reverse=True)
         log.info("Testing if Column 'Date of Birth' in Roster Table is Descending")
         dob_sorted_reverse = self.Mavericks_Page().getRosterDobsReverse()
         assert dob_sorted_reverse == self.Mavericks_Page().getRosterDobsReverse()
@@ -564,17 +560,289 @@ class TestDallasMavericksPage(BaseClass):
         log.info("Testing if Column 'College' in Roster Table is Descending")
         assert self.Mavericks_Page().getRosterCollegesReverse() == roster_colleges_sorted_reverse
 
+    def test_dallas_mavericks_roster_players_stats(self):
+        log = self.getLogger()
+        self.Mavericks_Page().openMavericksPageButton().click()
+        self.waitForElement("Roster")
+        self.Mavericks_Page().pressRosterButton().click()
 
+        self.waitForGaurd("//td[text()='C']")
+        players_with_updated_stats = []
+        players_with_out_stats = []
 
+        for player in self.Mavericks_Page().getRosterPlayersForPlayerStats():
+            player.click()
+            self.waitForPageComplete()
 
+            if self.Mavericks_Page().getIsPlayer().text != '':  # there IS a player stats
 
+                players_with_updated_stats.append(self.Mavericks_Page().getPlayerName())
 
+                self.Mavericks_Page().pressPlayersStatsSeasonsHeader().click()
+                seasons_sorted = sorted(self.Mavericks_Page().getPlayersStatsSeasons())
+                log.info(
+                    "Testing if Column 'Season' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
+                assert seasons_sorted == self.Mavericks_Page().getPlayersStatsSeasons()
 
+                self.Mavericks_Page().pressPlayersStatsSeasonsHeader().click()
+                seasons_sorted_reverse = sorted(self.Mavericks_Page().getPlayersStatsSeasonsReverse(), reverse=True)
+                log.info(
+                    "Testing if Column 'Season' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
+                assert seasons_sorted_reverse == self.Mavericks_Page().getPlayersStatsSeasonsReverse()
 
+                self.Mavericks_Page().pressPlayersStatsteamsHeader().click()
 
+                teams_sorted = sorted(self.Mavericks_Page().getPlayersStatsteams())
+                log.info(
+                    "Testing if Column 'Team' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
+                assert teams_sorted == self.Mavericks_Page().getPlayersStatsteams()
 
+                self.Mavericks_Page().pressPlayersStatsteamsHeader().click()
 
+                teams_sorted_reverse = sorted(self.Mavericks_Page().getPlayersStatsteamsReverse(), reverse=True)
+                log.info(
+                    "Testing if Column 'Team' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
+                assert teams_sorted_reverse == self.Mavericks_Page().getPlayersStatsteamsReverse()
 
+                self.Mavericks_Page().pressPlayersStatsnumGamesHeader().click()
 
+                games_int = [int(i) for i in self.Mavericks_Page().getPlayersStatsNumGames()]
+                num_games_sorted = sorted(games_int, reverse=True)
+                log.info(
+                    "Testing if Column 'Games' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
+                assert num_games_sorted == games_int
 
+                self.Mavericks_Page().pressPlayersStatsnumGamesHeader().click()
 
+                games_reverse_int = [int(i) for i in self.Mavericks_Page().getPlayersStatsNumGamesReverse()]
+                num_games_sorted_reverse = sorted(games_int)
+
+                log.info(
+                    "Testing if Column 'Games' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
+                assert num_games_sorted_reverse == games_reverse_int
+
+                self.Mavericks_Page().pressPlayersStatsNumGamesStartedHeader().click()
+
+                games_started_int = [int(i) for i in self.Mavericks_Page().getPlayersStatsNumGamesStarted()]
+                num_games_started_sorted = sorted(games_started_int, reverse=True)
+                log.info(
+                    "Testing if Column 'Games Started' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
+                assert num_games_started_sorted == games_started_int
+
+                self.Mavericks_Page().pressPlayersStatsNumGamesStartedHeader().click()
+
+                games_started_reverse_int = [int(i) for i in
+                                             self.Mavericks_Page().getPlayersStatsNumGamesStartedReverse()]
+                num_games_started_sorted_reverse = sorted(games_started_reverse_int)
+                log.info(
+                    "Testing if Column 'Games Started' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
+                assert num_games_started_sorted_reverse == games_started_reverse_int
+
+                self.Mavericks_Page().pressPlayersStatsMinutesPlayedHeader().click()
+
+                minutes_played_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsMinutesPlayed()]
+                minutes_played_sorted = sorted(minutes_played_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Minutes Played' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
+                assert minutes_played_sorted == minutes_played_float
+
+                self.Mavericks_Page().pressPlayersStatsMinutesPlayedHeader().click()
+
+                minutes_played_reverse_float = [float(i) for i in
+                                                self.Mavericks_Page().getPlayersStatsMinutesPlayedReverse()]
+                minutes_played_sorted_reverse = sorted(minutes_played_reverse_float)
+                log.info(
+                    "Testing if Column 'Minutes Played' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
+                assert minutes_played_sorted_reverse == minutes_played_reverse_float
+
+                self.Mavericks_Page().pressPlayersStatsFieldGoalsPercentageHeader().click()
+
+                field_goals_percentage_float = [float(i) for i in
+                                                self.Mavericks_Page().getPlayersStatsFieldGoalsPercentage()]
+                field_goals_percentage_sorted = sorted(field_goals_percentage_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Field Goals Percentage' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
+                assert field_goals_percentage_sorted == field_goals_percentage_float
+
+                self.Mavericks_Page().pressPlayersStatsFieldGoalsPercentageHeader().click()
+
+                field_goals_percentage_reverse_float = [float(i) for i in
+                                                        self.Mavericks_Page().getPlayersStatsFieldGoalsPercentageReverse()]
+                field_goals_percentage_sorted_reverse = sorted(field_goals_percentage_reverse_float)
+                log.info(
+                    "Testing if Column 'Field Goals Percentage' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
+                assert field_goals_percentage_sorted_reverse == field_goals_percentage_reverse_float
+
+                self.Mavericks_Page().pressPlayersStatsThreePointPercentageHeader().click()
+
+                three_point_percentage_float = [float(i) for i in
+                                                self.Mavericks_Page().getPlayersStatsThreePointPercentage()]
+                three_point_percentage_sorted = sorted(three_point_percentage_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Three Point Percentage' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
+                assert three_point_percentage_sorted == three_point_percentage_float
+
+                self.Mavericks_Page().pressPlayersStatsThreePointPercentageHeader().click()
+
+                three_point_percentage_reverse_float = [float(i) for i in
+                                                        self.Mavericks_Page().getPlayersStatsThreePointPercentageReverse()]
+                three_point_percentage_sorted_reverse = sorted(three_point_percentage_reverse_float)
+                log.info(
+                    "Testing if Column 'Three Point Percentage' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
+                assert three_point_percentage_sorted_reverse == three_point_percentage_reverse_float
+
+                self.Mavericks_Page().pressPlayersStatsFreeThrowPercentageHeader().click()
+
+                free_throw_percentage_float = [float(i) for i in
+                                               self.Mavericks_Page().getPlayersStatsFreethrowPercentage()]
+                free_throw_percentage_sorted = sorted(free_throw_percentage_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Free Throw Percentage' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
+                assert free_throw_percentage_sorted == free_throw_percentage_float
+
+                self.Mavericks_Page().pressPlayersStatsFreeThrowPercentageHeader().click()
+
+                free_throw_percentage_reverse_float = [float(i) for i in
+                                                       self.Mavericks_Page().getPlayersStatsFreethrowPercentageReverse()]
+                free_throw_percentage_sorted_reverse = sorted(free_throw_percentage_reverse_float)
+                log.info(
+                    "Testing if Column 'Free Throw Percentage' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
+                assert free_throw_percentage_sorted_reverse == free_throw_percentage_reverse_float
+
+                self.Mavericks_Page().pressPlayersStatsReboundsHeader().click()
+
+                rebounds_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsRebounds()]
+                rebounds_sorted = sorted(rebounds_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Rebounds' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
+                assert rebounds_sorted == rebounds_float
+
+                self.Mavericks_Page().pressPlayersStatsReboundsHeader().click()
+
+                rebounds_reverse_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsReboundsReverse()]
+                rebounds_sorted_reverse = sorted(rebounds_reverse_float)
+                log.info(
+                    "Testing if Column 'Rebounds' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
+                assert rebounds_sorted_reverse == rebounds_reverse_float
+
+                self.Mavericks_Page().pressPlayersStatsAssistsHeader().click()
+
+                assists_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsAssists()]
+                assists_sorted = sorted(assists_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Assists' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
+                assert assists_sorted == assists_float
+
+                self.Mavericks_Page().pressPlayersStatsAssistsHeader().click()
+
+                assists_reverse_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsAssistsReverse()]
+                assists_sorted_reverse = sorted(assists_reverse_float)
+                log.info(
+                    "Testing if Column 'Assists' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
+                assert assists_sorted_reverse == assists_reverse_float
+
+                self.Mavericks_Page().pressPlayersStatsStealsHeader().click()
+
+                steals_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsSteals()]
+                steals_sorted = sorted(steals_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Steals' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
+                assert steals_sorted == steals_float
+
+                self.Mavericks_Page().pressPlayersStatsStealsHeader().click()
+
+                steals_reverse_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsStealsReverse()]
+                steals_sorted_reverse = sorted(steals_reverse_float)
+                log.info(
+                    "Testing if Column 'Steals' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
+                assert steals_sorted_reverse == steals_reverse_float
+
+                self.Mavericks_Page().pressPlayersStatsBlocksHeader().click()
+
+                blocks_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsBlocks()]
+                blocks_sorted = sorted(blocks_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Blocks' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
+                assert blocks_sorted == blocks_float
+
+                self.Mavericks_Page().pressPlayersStatsBlocksHeader().click()
+
+                blocks_reverse_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsBlocksReverse()]
+                blocks_sorted_reverse = sorted(blocks_reverse_float)
+                log.info(
+                    "Testing if Column 'Blocks' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
+                assert blocks_sorted_reverse == blocks_reverse_float
+
+                self.Mavericks_Page().pressPlayersStatsTurnoversHeader().click()
+
+                turnovers_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsTurnovers()]
+                turnovers_sorted = sorted(turnovers_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Turnovers' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
+                assert turnovers_sorted == turnovers_float
+
+                self.Mavericks_Page().pressPlayersStatsTurnoversHeader().click()
+
+                turnovers_reverse_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsTurnoversReverse()]
+                turnovers_sorted_reverse = sorted(turnovers_reverse_float)
+                log.info(
+                    "Testing if Column 'Turnovers' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
+                assert turnovers_sorted_reverse == turnovers_reverse_float
+
+                self.Mavericks_Page().pressPlayersStatsPointsHeader().click()
+
+                points_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsPoints()]
+                points_sorted = sorted(points_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Points' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
+                assert points_sorted == points_float
+
+                self.Mavericks_Page().pressPlayersStatsPointsHeader().click()
+
+                points_reverse_float = [float(i) for i in self.Mavericks_Page().getPlayersStatsPointsReverse()]
+                points_sorted_reverse = sorted(points_reverse_float)
+                log.info(
+                    "Testing if Column 'Points' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
+                assert points_sorted_reverse == points_reverse_float
+
+                self.Mavericks_Page().pressPlayersStatsDoubleDoublesHeader().click()
+
+                double_doubles_int = [int(i) for i in self.Mavericks_Page().getPlayersStatsDoubleDoubles()]
+                double_doubles_sorted = sorted(double_doubles_int, reverse=True)
+                log.info(
+                    "Testing if Column 'DoubleDoubles' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
+                assert double_doubles_sorted == double_doubles_int
+
+                self.Mavericks_Page().pressPlayersStatsDoubleDoublesHeader().click()
+
+                double_doubles_reverse_int = [int(i) for i in
+                                              self.Mavericks_Page().getPlayersStatsDoubleDoublesReverse()]
+                double_doubles_sorted_reverse = sorted(double_doubles_reverse_int)
+                log.info(
+                    "Testing if Column 'DoubleDoubles' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
+                assert double_doubles_sorted_reverse == double_doubles_reverse_int
+
+                self.Mavericks_Page().pressPlayersStatsTripleDoublesHeader().click()
+
+                triple_doubles_int = [int(i) for i in self.Mavericks_Page().getPlayersStatsTripleDoubles()]
+                triple_doubles_sorted = sorted(triple_doubles_int, reverse=True)
+                log.info(
+                    "Testing if Column 'TripleDoubles' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Descending")
+                assert triple_doubles_sorted == triple_doubles_int
+
+                self.Mavericks_Page().pressPlayersStatsTripleDoublesHeader().click()
+
+                triple_doubles_reverse_int = [int(i) for i in
+                                              self.Mavericks_Page().getPlayersStatsTripleDoublesReverse()]
+                triple_doubles_sorted_reverse = sorted(triple_doubles_reverse_int)
+                log.info(
+                    "Testing if Column 'TripleDoubles' in Player " + self.Mavericks_Page().getPlayerName() + " Table is Ascending")
+                assert triple_doubles_sorted_reverse == triple_doubles_reverse_int
+
+            else:
+
+                players_with_out_stats.append(self.Mavericks_Page().getPlayerName())
+
+            self.Mavericks_Page().closePlayerStatsCloseButton().click()
+        log.info("List of players with updated stats: " + str(players_with_updated_stats))
+        log.info("List of players without updated stats: " + str(players_with_out_stats))
