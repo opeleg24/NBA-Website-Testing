@@ -15,7 +15,6 @@ from utilities.BaseClass import BaseClass
 
 class TestTorontoRaptorsPage(BaseClass):
 
-
     def test_toronto_raptors_franchise_verifiy_team(self):
         log = self.getLogger()
         log.info("Opening Toronto Raptors Page")
@@ -24,296 +23,6 @@ class TestTorontoRaptorsPage(BaseClass):
         self.waitForTeamText()
         log.info("Verify Toronto Raptors Page")
         assert "Toronto Raptors" in self.Raptors_Page().verifyTeamText().text
-
-
-    def test_toronto_raptors_roster_players_stats(self):
-        log = self.getLogger()
-        self.Raptors_Page().openRaptorsPageButton().click()
-        self.waitForElement("Roster")
-        self.Raptors_Page().pressRosterButton().click()
-        # time.sleep(2)
-        self.waitForGaurd("//td[text()='C']")
-        players_with_updated_stats = []
-        players_with_out_stats = []
-
-        for player in self.Raptors_Page().getRosterPlayersForPlayerStats():
-            player.click()
-            self.waitForPageComplete()
-
-            if self.Raptors_Page().getIsPlayer().text != '':  # there IS a player stats
-                # time.sleep(2)
-                players_with_updated_stats.append(self.Raptors_Page().getPlayerName())
-                # time.sleep(2)
-                self.Raptors_Page().pressPlayersStatsSeasonsHeader().click()
-                seasons_sorted = sorted(self.Raptors_Page().getPlayersStatsSeasons())
-                log.info(
-                    "Testing if Column 'Season' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
-                assert seasons_sorted == self.Raptors_Page().getPlayersStatsSeasons()
-
-                self.Raptors_Page().pressPlayersStatsSeasonsHeader().click()
-                seasons_sorted_reverse = sorted(self.Raptors_Page().getPlayersStatsSeasonsReverse(), reverse=True)
-                log.info(
-                    "Testing if Column 'Season' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
-                assert seasons_sorted_reverse == self.Raptors_Page().getPlayersStatsSeasonsReverse()
-
-                self.Raptors_Page().pressPlayersStatsteamsHeader().click()
-                # time.sleep(0.5)
-                teams_sorted = sorted(self.Raptors_Page().getPlayersStatsteams())
-                log.info(
-                    "Testing if Column 'Team' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
-                assert teams_sorted == self.Raptors_Page().getPlayersStatsteams()
-
-                self.Raptors_Page().pressPlayersStatsteamsHeader().click()
-                # time.sleep(0.5)
-                teams_sorted_reverse = sorted(self.Raptors_Page().getPlayersStatsteamsReverse(), reverse=True)
-                log.info(
-                    "Testing if Column 'Team' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
-                assert teams_sorted_reverse == self.Raptors_Page().getPlayersStatsteamsReverse()
-
-                self.Raptors_Page().pressPlayersStatsnumGamesHeader().click()
-                # time.sleep(0.5)
-                games_int = [int(i) for i in self.Raptors_Page().getPlayersStatsNumGames()]
-                num_games_sorted = sorted(games_int, reverse=True)
-                log.info(
-                    "Testing if Column 'Games' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
-                assert num_games_sorted == games_int
-
-                self.Raptors_Page().pressPlayersStatsnumGamesHeader().click()
-                # time.sleep(0.5)
-                games_reverse_int = [int(i) for i in self.Raptors_Page().getPlayersStatsNumGamesReverse()]
-                num_games_sorted_reverse = sorted(games_int)
-
-                log.info(
-                    "Testing if Column 'Games' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
-                assert num_games_sorted_reverse == games_reverse_int
-
-                self.Raptors_Page().pressPlayersStatsNumGamesStartedHeader().click()
-                # time.sleep(0.5)
-                games_started_int = [int(i) for i in self.Raptors_Page().getPlayersStatsNumGamesStarted()]
-                num_games_started_sorted = sorted(games_started_int, reverse=True)
-                log.info(
-                    "Testing if Column 'Games Started' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
-                assert num_games_started_sorted == games_started_int
-
-                self.Raptors_Page().pressPlayersStatsNumGamesStartedHeader().click()
-                # time.sleep(0.5)
-                games_started_reverse_int = [int(i) for i in self.Raptors_Page().getPlayersStatsNumGamesStartedReverse()]
-                num_games_started_sorted_reverse = sorted(games_started_reverse_int)
-                log.info(
-                    "Testing if Column 'Games Started' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
-                assert num_games_started_sorted_reverse == games_started_reverse_int
-
-                self.Raptors_Page().pressPlayersStatsMinutesPlayedHeader().click()
-                # time.sleep(0.5)
-                minutes_played_float = [float(i) for i in self.Raptors_Page().getPlayersStatsMinutesPlayed()]
-                minutes_played_sorted = sorted(minutes_played_float, reverse=True)
-                log.info(
-                    "Testing if Column 'Minutes Played' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
-                assert minutes_played_sorted == minutes_played_float
-
-                self.Raptors_Page().pressPlayersStatsMinutesPlayedHeader().click()
-                # time.sleep(0.5)
-                minutes_played_reverse_float = [float(i) for i in
-                                                self.Raptors_Page().getPlayersStatsMinutesPlayedReverse()]
-                minutes_played_sorted_reverse = sorted(minutes_played_reverse_float)
-                log.info(
-                    "Testing if Column 'Minutes Played' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
-                assert minutes_played_sorted_reverse == minutes_played_reverse_float
-
-                self.Raptors_Page().pressPlayersStatsFieldGoalsPercentageHeader().click()
-                # time.sleep(0.5)
-                field_goals_percentage_float = [float(i) for i in
-                                                self.Raptors_Page().getPlayersStatsFieldGoalsPercentage()]
-                field_goals_percentage_sorted = sorted(field_goals_percentage_float, reverse=True)
-                log.info(
-                    "Testing if Column 'Field Goals Percentage' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
-                assert field_goals_percentage_sorted == field_goals_percentage_float
-
-                self.Raptors_Page().pressPlayersStatsFieldGoalsPercentageHeader().click()
-                # time.sleep(0.5)
-                field_goals_percentage_reverse_float = [float(i) for i in
-                                                        self.Raptors_Page().getPlayersStatsFieldGoalsPercentageReverse()]
-                field_goals_percentage_sorted_reverse = sorted(field_goals_percentage_reverse_float)
-                log.info(
-                    "Testing if Column 'Field Goals Percentage' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
-                assert field_goals_percentage_sorted_reverse == field_goals_percentage_reverse_float
-
-                self.Raptors_Page().pressPlayersStatsThreePointPercentageHeader().click()
-                # time.sleep(0.5)
-                three_point_percentage_float = [float(i) for i in
-                                                self.Raptors_Page().getPlayersStatsThreePointPercentage()]
-                three_point_percentage_sorted = sorted(three_point_percentage_float, reverse=True)
-                log.info(
-                    "Testing if Column 'Three Point Percentage' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
-                assert three_point_percentage_sorted == three_point_percentage_float
-
-                self.Raptors_Page().pressPlayersStatsThreePointPercentageHeader().click()
-                # time.sleep(0.5)
-                three_point_percentage_reverse_float = [float(i) for i in
-                                                        self.Raptors_Page().getPlayersStatsThreePointPercentageReverse()]
-                three_point_percentage_sorted_reverse = sorted(three_point_percentage_reverse_float)
-                log.info(
-                    "Testing if Column 'Three Point Percentage' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
-                assert three_point_percentage_sorted_reverse == three_point_percentage_reverse_float
-
-                self.Raptors_Page().pressPlayersStatsFreeThrowPercentageHeader().click()
-                # time.sleep(0.5)
-                free_throw_percentage_float = [float(i) for i in self.Raptors_Page().getPlayersStatsFreethrowPercentage()]
-                free_throw_percentage_sorted = sorted(free_throw_percentage_float, reverse=True)
-                log.info(
-                    "Testing if Column 'Free Throw Percentage' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
-                assert free_throw_percentage_sorted == free_throw_percentage_float
-
-                self.Raptors_Page().pressPlayersStatsFreeThrowPercentageHeader().click()
-                # time.sleep(0.5)
-                free_throw_percentage_reverse_float = [float(i) for i in
-                                                       self.Raptors_Page().getPlayersStatsFreethrowPercentageReverse()]
-                free_throw_percentage_sorted_reverse = sorted(free_throw_percentage_reverse_float)
-                log.info(
-                    "Testing if Column 'Free Throw Percentage' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
-                assert free_throw_percentage_sorted_reverse == free_throw_percentage_reverse_float
-
-                self.Raptors_Page().pressPlayersStatsReboundsHeader().click()
-                # time.sleep(0.5)
-                rebounds_float = [float(i) for i in self.Raptors_Page().getPlayersStatsRebounds()]
-                rebounds_sorted = sorted(rebounds_float, reverse=True)
-                log.info(
-                    "Testing if Column 'Rebounds' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
-                assert rebounds_sorted == rebounds_float
-
-                self.Raptors_Page().pressPlayersStatsReboundsHeader().click()
-                # time.sleep(0.5)
-                rebounds_reverse_float = [float(i) for i in self.Raptors_Page().getPlayersStatsReboundsReverse()]
-                rebounds_sorted_reverse = sorted(rebounds_reverse_float)
-                log.info(
-                    "Testing if Column 'Rebounds' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
-                assert rebounds_sorted_reverse == rebounds_reverse_float
-
-                self.Raptors_Page().pressPlayersStatsAssistsHeader().click()
-                # time.sleep(0.5)
-                assists_float = [float(i) for i in self.Raptors_Page().getPlayersStatsAssists()]
-                assists_sorted = sorted(assists_float, reverse=True)
-                log.info(
-                    "Testing if Column 'Assists' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
-                assert assists_sorted == assists_float
-
-                self.Raptors_Page().pressPlayersStatsAssistsHeader().click()
-                # time.sleep(0.5)
-                assists_reverse_float = [float(i) for i in self.Raptors_Page().getPlayersStatsAssistsReverse()]
-                assists_sorted_reverse = sorted(assists_reverse_float)
-                log.info(
-                    "Testing if Column 'Assists' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
-                assert assists_sorted_reverse == assists_reverse_float
-
-                self.Raptors_Page().pressPlayersStatsStealsHeader().click()
-                # time.sleep(0.5)
-                steals_float = [float(i) for i in self.Raptors_Page().getPlayersStatsSteals()]
-                steals_sorted = sorted(steals_float, reverse=True)
-                log.info(
-                    "Testing if Column 'Steals' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
-                assert steals_sorted == steals_float
-
-                self.Raptors_Page().pressPlayersStatsStealsHeader().click()
-                # time.sleep(0.5)
-                steals_reverse_float = [float(i) for i in self.Raptors_Page().getPlayersStatsStealsReverse()]
-                steals_sorted_reverse = sorted(steals_reverse_float)
-                log.info(
-                    "Testing if Column 'Steals' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
-                assert steals_sorted_reverse == steals_reverse_float
-
-                self.Raptors_Page().pressPlayersStatsBlocksHeader().click()
-                # time.sleep(0.5)
-                blocks_float = [float(i) for i in self.Raptors_Page().getPlayersStatsBlocks()]
-                blocks_sorted = sorted(blocks_float, reverse=True)
-                log.info(
-                    "Testing if Column 'Blocks' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
-                assert blocks_sorted == blocks_float
-
-                self.Raptors_Page().pressPlayersStatsBlocksHeader().click()
-                # time.sleep(0.5)
-                blocks_reverse_float = [float(i) for i in self.Raptors_Page().getPlayersStatsBlocksReverse()]
-                blocks_sorted_reverse = sorted(blocks_reverse_float)
-                log.info(
-                    "Testing if Column 'Blocks' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
-                assert blocks_sorted_reverse == blocks_reverse_float
-
-                self.Raptors_Page().pressPlayersStatsTurnoversHeader().click()
-                # time.sleep(0.5)
-                turnovers_float = [float(i) for i in self.Raptors_Page().getPlayersStatsTurnovers()]
-                turnovers_sorted = sorted(turnovers_float, reverse=True)
-                log.info(
-                    "Testing if Column 'Turnovers' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
-                assert turnovers_sorted == turnovers_float
-
-                self.Raptors_Page().pressPlayersStatsTurnoversHeader().click()
-                # time.sleep(0.5)
-                turnovers_reverse_float = [float(i) for i in self.Raptors_Page().getPlayersStatsTurnoversReverse()]
-                turnovers_sorted_reverse = sorted(turnovers_reverse_float)
-                log.info(
-                    "Testing if Column 'Turnovers' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
-                assert turnovers_sorted_reverse == turnovers_reverse_float
-
-                self.Raptors_Page().pressPlayersStatsPointsHeader().click()
-                # time.sleep(0.5)
-                points_float = [float(i) for i in self.Raptors_Page().getPlayersStatsPoints()]
-                points_sorted = sorted(points_float, reverse=True)
-                log.info(
-                    "Testing if Column 'Points' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
-                assert points_sorted == points_float
-
-                self.Raptors_Page().pressPlayersStatsPointsHeader().click()
-                # time.sleep(0.5)
-                points_reverse_float = [float(i) for i in self.Raptors_Page().getPlayersStatsPointsReverse()]
-                points_sorted_reverse = sorted(points_reverse_float)
-                log.info(
-                    "Testing if Column 'Points' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
-                assert points_sorted_reverse == points_reverse_float
-
-                self.Raptors_Page().pressPlayersStatsDoubleDoublesHeader().click()
-                # time.sleep(0.5)
-                double_doubles_int = [int(i) for i in self.Raptors_Page().getPlayersStatsDoubleDoubles()]
-                double_doubles_sorted = sorted(double_doubles_int, reverse=True)
-                log.info(
-                    "Testing if Column 'DoubleDoubles' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
-                assert double_doubles_sorted == double_doubles_int
-
-                self.Raptors_Page().pressPlayersStatsDoubleDoublesHeader().click()
-                # time.sleep(0.5)
-                double_doubles_reverse_int = [int(i) for i in self.Raptors_Page().getPlayersStatsDoubleDoublesReverse()]
-                double_doubles_sorted_reverse = sorted(double_doubles_reverse_int)
-                log.info(
-                    "Testing if Column 'DoubleDoubles' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
-                assert double_doubles_sorted_reverse == double_doubles_reverse_int
-
-                self.Raptors_Page().pressPlayersStatsTripleDoublesHeader().click()
-                # time.sleep(0.5)
-                triple_doubles_int = [int(i) for i in self.Raptors_Page().getPlayersStatsTripleDoubles()]
-                triple_doubles_sorted = sorted(triple_doubles_int, reverse=True)
-                log.info(
-                    "Testing if Column 'TripleDoubles' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
-                assert triple_doubles_sorted == triple_doubles_int
-
-                self.Raptors_Page().pressPlayersStatsTripleDoublesHeader().click()
-                # time.sleep(0.5)
-                triple_doubles_reverse_int = [int(i) for i in self.Raptors_Page().getPlayersStatsTripleDoublesReverse()]
-                triple_doubles_sorted_reverse = sorted(triple_doubles_reverse_int)
-                log.info(
-                    "Testing if Column 'TripleDoubles' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
-                assert triple_doubles_sorted_reverse == triple_doubles_reverse_int
-
-            else:
-                # time.sleep(1)
-
-                players_with_out_stats.append(self.Raptors_Page().getPlayerName())
-                # time.sleep(1)
-
-            self.Raptors_Page().closePlayerStatsCloseButton().click()
-        log.info("List of players with updated stats: " + str(players_with_updated_stats))
-        log.info("List of players without updated stats: " + str(players_with_out_stats))
-
-
-
-
 
     @pytest.mark.usefixtures("raptors_salaries_team_setup")
     def test_toronto_raptors_salaries_sorted_players_column(self):
@@ -565,4 +274,287 @@ class TestTorontoRaptorsPage(BaseClass):
         log.info("Testing if Column 'College' in Roster Table is Descending")
         assert self.Raptors_Page().getRosterCollegesReverse() == roster_colleges_sorted_reverse
 
+    def test_toronto_raptors_roster_players_stats(self):
+        log = self.getLogger()
+        self.Raptors_Page().openRaptorsPageButton().click()
+        self.waitForElement("Roster")
+        self.Raptors_Page().pressRosterButton().click()
 
+        self.waitForGaurd("//td[text()='C']")
+        players_with_updated_stats = []
+        players_with_out_stats = []
+
+        for player in self.Raptors_Page().getRosterPlayersForPlayerStats():
+            player.click()
+            self.waitForPageComplete()
+
+            if self.Raptors_Page().getIsPlayer().text != '':  # there IS a player stats
+
+                players_with_updated_stats.append(self.Raptors_Page().getPlayerName())
+
+                self.Raptors_Page().pressPlayersStatsSeasonsHeader().click()
+                seasons_sorted = sorted(self.Raptors_Page().getPlayersStatsSeasons())
+                log.info(
+                    "Testing if Column 'Season' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
+                assert seasons_sorted == self.Raptors_Page().getPlayersStatsSeasons()
+
+                self.Raptors_Page().pressPlayersStatsSeasonsHeader().click()
+                seasons_sorted_reverse = sorted(self.Raptors_Page().getPlayersStatsSeasonsReverse(), reverse=True)
+                log.info(
+                    "Testing if Column 'Season' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
+                assert seasons_sorted_reverse == self.Raptors_Page().getPlayersStatsSeasonsReverse()
+
+                self.Raptors_Page().pressPlayersStatsteamsHeader().click()
+
+                teams_sorted = sorted(self.Raptors_Page().getPlayersStatsteams())
+                log.info(
+                    "Testing if Column 'Team' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
+                assert teams_sorted == self.Raptors_Page().getPlayersStatsteams()
+
+                self.Raptors_Page().pressPlayersStatsteamsHeader().click()
+
+                teams_sorted_reverse = sorted(self.Raptors_Page().getPlayersStatsteamsReverse(), reverse=True)
+                log.info(
+                    "Testing if Column 'Team' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
+                assert teams_sorted_reverse == self.Raptors_Page().getPlayersStatsteamsReverse()
+
+                self.Raptors_Page().pressPlayersStatsnumGamesHeader().click()
+
+                games_int = [int(i) for i in self.Raptors_Page().getPlayersStatsNumGames()]
+                num_games_sorted = sorted(games_int, reverse=True)
+                log.info(
+                    "Testing if Column 'Games' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
+                assert num_games_sorted == games_int
+
+                self.Raptors_Page().pressPlayersStatsnumGamesHeader().click()
+
+                games_reverse_int = [int(i) for i in self.Raptors_Page().getPlayersStatsNumGamesReverse()]
+                num_games_sorted_reverse = sorted(games_int)
+
+                log.info(
+                    "Testing if Column 'Games' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
+                assert num_games_sorted_reverse == games_reverse_int
+
+                self.Raptors_Page().pressPlayersStatsNumGamesStartedHeader().click()
+
+                games_started_int = [int(i) for i in self.Raptors_Page().getPlayersStatsNumGamesStarted()]
+                num_games_started_sorted = sorted(games_started_int, reverse=True)
+                log.info(
+                    "Testing if Column 'Games Started' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
+                assert num_games_started_sorted == games_started_int
+
+                self.Raptors_Page().pressPlayersStatsNumGamesStartedHeader().click()
+
+                games_started_reverse_int = [int(i) for i in
+                                             self.Raptors_Page().getPlayersStatsNumGamesStartedReverse()]
+                num_games_started_sorted_reverse = sorted(games_started_reverse_int)
+                log.info(
+                    "Testing if Column 'Games Started' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
+                assert num_games_started_sorted_reverse == games_started_reverse_int
+
+                self.Raptors_Page().pressPlayersStatsMinutesPlayedHeader().click()
+
+                minutes_played_float = [float(i) for i in self.Raptors_Page().getPlayersStatsMinutesPlayed()]
+                minutes_played_sorted = sorted(minutes_played_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Minutes Played' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
+                assert minutes_played_sorted == minutes_played_float
+
+                self.Raptors_Page().pressPlayersStatsMinutesPlayedHeader().click()
+
+                minutes_played_reverse_float = [float(i) for i in
+                                                self.Raptors_Page().getPlayersStatsMinutesPlayedReverse()]
+                minutes_played_sorted_reverse = sorted(minutes_played_reverse_float)
+                log.info(
+                    "Testing if Column 'Minutes Played' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
+                assert minutes_played_sorted_reverse == minutes_played_reverse_float
+
+                self.Raptors_Page().pressPlayersStatsFieldGoalsPercentageHeader().click()
+
+                field_goals_percentage_float = [float(i) for i in
+                                                self.Raptors_Page().getPlayersStatsFieldGoalsPercentage()]
+                field_goals_percentage_sorted = sorted(field_goals_percentage_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Field Goals Percentage' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
+                assert field_goals_percentage_sorted == field_goals_percentage_float
+
+                self.Raptors_Page().pressPlayersStatsFieldGoalsPercentageHeader().click()
+
+                field_goals_percentage_reverse_float = [float(i) for i in
+                                                        self.Raptors_Page().getPlayersStatsFieldGoalsPercentageReverse()]
+                field_goals_percentage_sorted_reverse = sorted(field_goals_percentage_reverse_float)
+                log.info(
+                    "Testing if Column 'Field Goals Percentage' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
+                assert field_goals_percentage_sorted_reverse == field_goals_percentage_reverse_float
+
+                self.Raptors_Page().pressPlayersStatsThreePointPercentageHeader().click()
+
+                three_point_percentage_float = [float(i) for i in
+                                                self.Raptors_Page().getPlayersStatsThreePointPercentage()]
+                three_point_percentage_sorted = sorted(three_point_percentage_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Three Point Percentage' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
+                assert three_point_percentage_sorted == three_point_percentage_float
+
+                self.Raptors_Page().pressPlayersStatsThreePointPercentageHeader().click()
+
+                three_point_percentage_reverse_float = [float(i) for i in
+                                                        self.Raptors_Page().getPlayersStatsThreePointPercentageReverse()]
+                three_point_percentage_sorted_reverse = sorted(three_point_percentage_reverse_float)
+                log.info(
+                    "Testing if Column 'Three Point Percentage' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
+                assert three_point_percentage_sorted_reverse == three_point_percentage_reverse_float
+
+                self.Raptors_Page().pressPlayersStatsFreeThrowPercentageHeader().click()
+
+                free_throw_percentage_float = [float(i) for i in
+                                               self.Raptors_Page().getPlayersStatsFreethrowPercentage()]
+                free_throw_percentage_sorted = sorted(free_throw_percentage_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Free Throw Percentage' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
+                assert free_throw_percentage_sorted == free_throw_percentage_float
+
+                self.Raptors_Page().pressPlayersStatsFreeThrowPercentageHeader().click()
+
+                free_throw_percentage_reverse_float = [float(i) for i in
+                                                       self.Raptors_Page().getPlayersStatsFreethrowPercentageReverse()]
+                free_throw_percentage_sorted_reverse = sorted(free_throw_percentage_reverse_float)
+                log.info(
+                    "Testing if Column 'Free Throw Percentage' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
+                assert free_throw_percentage_sorted_reverse == free_throw_percentage_reverse_float
+
+                self.Raptors_Page().pressPlayersStatsReboundsHeader().click()
+
+                rebounds_float = [float(i) for i in self.Raptors_Page().getPlayersStatsRebounds()]
+                rebounds_sorted = sorted(rebounds_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Rebounds' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
+                assert rebounds_sorted == rebounds_float
+
+                self.Raptors_Page().pressPlayersStatsReboundsHeader().click()
+
+                rebounds_reverse_float = [float(i) for i in self.Raptors_Page().getPlayersStatsReboundsReverse()]
+                rebounds_sorted_reverse = sorted(rebounds_reverse_float)
+                log.info(
+                    "Testing if Column 'Rebounds' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
+                assert rebounds_sorted_reverse == rebounds_reverse_float
+
+                self.Raptors_Page().pressPlayersStatsAssistsHeader().click()
+
+                assists_float = [float(i) for i in self.Raptors_Page().getPlayersStatsAssists()]
+                assists_sorted = sorted(assists_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Assists' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
+                assert assists_sorted == assists_float
+
+                self.Raptors_Page().pressPlayersStatsAssistsHeader().click()
+
+                assists_reverse_float = [float(i) for i in self.Raptors_Page().getPlayersStatsAssistsReverse()]
+                assists_sorted_reverse = sorted(assists_reverse_float)
+                log.info(
+                    "Testing if Column 'Assists' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
+                assert assists_sorted_reverse == assists_reverse_float
+
+                self.Raptors_Page().pressPlayersStatsStealsHeader().click()
+
+                steals_float = [float(i) for i in self.Raptors_Page().getPlayersStatsSteals()]
+                steals_sorted = sorted(steals_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Steals' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
+                assert steals_sorted == steals_float
+
+                self.Raptors_Page().pressPlayersStatsStealsHeader().click()
+
+                steals_reverse_float = [float(i) for i in self.Raptors_Page().getPlayersStatsStealsReverse()]
+                steals_sorted_reverse = sorted(steals_reverse_float)
+                log.info(
+                    "Testing if Column 'Steals' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
+                assert steals_sorted_reverse == steals_reverse_float
+
+                self.Raptors_Page().pressPlayersStatsBlocksHeader().click()
+
+                blocks_float = [float(i) for i in self.Raptors_Page().getPlayersStatsBlocks()]
+                blocks_sorted = sorted(blocks_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Blocks' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
+                assert blocks_sorted == blocks_float
+
+                self.Raptors_Page().pressPlayersStatsBlocksHeader().click()
+
+                blocks_reverse_float = [float(i) for i in self.Raptors_Page().getPlayersStatsBlocksReverse()]
+                blocks_sorted_reverse = sorted(blocks_reverse_float)
+                log.info(
+                    "Testing if Column 'Blocks' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
+                assert blocks_sorted_reverse == blocks_reverse_float
+
+                self.Raptors_Page().pressPlayersStatsTurnoversHeader().click()
+
+                turnovers_float = [float(i) for i in self.Raptors_Page().getPlayersStatsTurnovers()]
+                turnovers_sorted = sorted(turnovers_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Turnovers' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
+                assert turnovers_sorted == turnovers_float
+
+                self.Raptors_Page().pressPlayersStatsTurnoversHeader().click()
+
+                turnovers_reverse_float = [float(i) for i in self.Raptors_Page().getPlayersStatsTurnoversReverse()]
+                turnovers_sorted_reverse = sorted(turnovers_reverse_float)
+                log.info(
+                    "Testing if Column 'Turnovers' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
+                assert turnovers_sorted_reverse == turnovers_reverse_float
+
+                self.Raptors_Page().pressPlayersStatsPointsHeader().click()
+
+                points_float = [float(i) for i in self.Raptors_Page().getPlayersStatsPoints()]
+                points_sorted = sorted(points_float, reverse=True)
+                log.info(
+                    "Testing if Column 'Points' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
+                assert points_sorted == points_float
+
+                self.Raptors_Page().pressPlayersStatsPointsHeader().click()
+
+                points_reverse_float = [float(i) for i in self.Raptors_Page().getPlayersStatsPointsReverse()]
+                points_sorted_reverse = sorted(points_reverse_float)
+                log.info(
+                    "Testing if Column 'Points' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
+                assert points_sorted_reverse == points_reverse_float
+
+                self.Raptors_Page().pressPlayersStatsDoubleDoublesHeader().click()
+
+                double_doubles_int = [int(i) for i in self.Raptors_Page().getPlayersStatsDoubleDoubles()]
+                double_doubles_sorted = sorted(double_doubles_int, reverse=True)
+                log.info(
+                    "Testing if Column 'DoubleDoubles' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
+                assert double_doubles_sorted == double_doubles_int
+
+                self.Raptors_Page().pressPlayersStatsDoubleDoublesHeader().click()
+
+                double_doubles_reverse_int = [int(i) for i in self.Raptors_Page().getPlayersStatsDoubleDoublesReverse()]
+                double_doubles_sorted_reverse = sorted(double_doubles_reverse_int)
+                log.info(
+                    "Testing if Column 'DoubleDoubles' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
+                assert double_doubles_sorted_reverse == double_doubles_reverse_int
+
+                self.Raptors_Page().pressPlayersStatsTripleDoublesHeader().click()
+
+                triple_doubles_int = [int(i) for i in self.Raptors_Page().getPlayersStatsTripleDoubles()]
+                triple_doubles_sorted = sorted(triple_doubles_int, reverse=True)
+                log.info(
+                    "Testing if Column 'TripleDoubles' in Player " + self.Raptors_Page().getPlayerName() + " Table is Descending")
+                assert triple_doubles_sorted == triple_doubles_int
+
+                self.Raptors_Page().pressPlayersStatsTripleDoublesHeader().click()
+
+                triple_doubles_reverse_int = [int(i) for i in self.Raptors_Page().getPlayersStatsTripleDoublesReverse()]
+                triple_doubles_sorted_reverse = sorted(triple_doubles_reverse_int)
+                log.info(
+                    "Testing if Column 'TripleDoubles' in Player " + self.Raptors_Page().getPlayerName() + " Table is Ascending")
+                assert triple_doubles_sorted_reverse == triple_doubles_reverse_int
+
+            else:
+            
+                players_with_out_stats.append(self.Raptors_Page().getPlayerName())
+
+            self.Raptors_Page().closePlayerStatsCloseButton().click()
+        log.info("List of players with updated stats: " + str(players_with_updated_stats))
+        log.info("List of players without updated stats: " + str(players_with_out_stats))
